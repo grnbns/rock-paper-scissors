@@ -1,0 +1,53 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button {
+    font-size: 30px;
+    font-family: 'Times New Roman';
+    margin: 20px;
+    padding: 10px;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+.buttons {
+    margin: 30px;
+}
+
+.scores {
+    font-size: 160px;
+}
+
+.score-labels {
+    display: flex;
+    justify-content: space-around;
+    gap: 60px;
+}
+
+.score-labels h2 {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 150px;
+}
+
+.score-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+}
+
+.result {
+    font-size: 50px;
+    margin: 50px;
+}

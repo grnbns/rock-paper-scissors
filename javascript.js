@@ -18,6 +18,15 @@ function playGame() {
     let humanScore = 0;
     let computerScore = 0;
 
+    const rockButton = document.querySelector(".rock");
+    const paperButton = document.querySelector(".paper");
+    const scissorsButton = document.querySelector(".scissors");
+
+    const hScore = document.querySelector(".h-score");
+    const cScore = document.querySelector(".c-score");
+
+    const result = document.querySelector(".result");
+
     function playRound(humanChoice, computerChoice) {
 
         let winner;
@@ -27,56 +36,72 @@ function playGame() {
                 winner = "tie";
             } else if (computerChoice == "paper") {
                 winner = "lose";
-                computerScore++;
+                cScore.textContent = 1 + +cScore.textContent;
             } else {
                 winner = "win";
-                humanScore++;
+                hScore.textContent = 1 + +hScore.textContent;
             }
         } else if (humanChoice === "paper") {
             if (computerChoice === "paper") {
                 winner = "tie";
             } else if (computerChoice == "scissors") {
                 winner = "lose";
-                computerScore++;
+                cScore.textContent = 1 + +cScore.textContent;
             } else {
                 winner = "win";
-                humanScore++;
+                hScore.textContent = 1 + +hScore.textContent;
             }
         } else {
             if (computerChoice === "scissors") {
                 winner = "tie";
             } else if (computerChoice == "rock") {
                 winner = "lose";
-                computerScore++;
+                cScore.textContent = 1 + +cScore.textContent;
             } else {
                 winner = "win";
-                humanScore++;
+                hScore.textContent = 1 + +hScore.textContent;
             }
         }
 
+        const running = document.querySelector(".running");
+
+        const msg = document.createElement("p");
+
         if (winner == "win") {
-            console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+            msg.textContent = `You win! You chose ${humanChoice}, computer chose ${computerChoice}.`;
         } else if (winner == "lose") {
-            console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+            msg.textContent = `You lose! You chose ${humanChoice}, computer chose ${computerChoice}.`;
         } else {
-            console.log(`You tie! Both picked ${humanChoice}.`);
+            msg.textContent = `You tie! Both chose ${humanChoice}.`;
+        }
+
+        running.appendChild(msg);
+
+        if (hScore.textContent == 5) {
+            result.textContent = "You win the game!!!";
+            rockButton.removeEventListener("click", playRock);
+            paperButton.removeEventListener("click", playPaper);
+            scissorsButton.removeEventListener("click", playScissors);
+            return;
+        }
+        if (cScore.textContent == 5) {
+            result.textContent = "You lost the game :(";
+            rockButton.removeEventListener("click", playRock);
+            paperButton.removeEventListener("click", playPaper);
+            scissorsButton.removeEventListener("click", playScissors);
+            return;
         }
     }
 
-    for (let round = 1; round <= 5; round++) {
-        playRound(getHumanChoice(), getComputerChoice());
-    }
+    const playRock = () => playRound("rock", getComputerChoice());
+    const playPaper = () => playRound("paper", getComputerChoice());
+    const playScissors = () => playRound("scissors", getComputerChoice())
 
-    console.log(`Your score: ${humanScore}; Computer's score: ${computerScore}`);
-
-    if (humanScore > computerScore) {
-        console.log("You are the winner!");
-    } else if (humanScore < computerScore) {
-        console.log("You lose. Computer wins!");
-    } else {
-        console.log("Tie!");
-    }
+    rockButton.addEventListener("click", playRock);
+    paperButton.addEventListener("click", playPaper);
+    scissorsButton.addEventListener("click", playScissors);
 
 }
+
 
 playGame();
